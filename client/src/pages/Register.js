@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import {Button, Form} from 'semantic-ui-react'
 import {useMutation} from '@apollo/client'
 import gql from 'graphql-tag'
+import {useForm} from '../hooks/useForm'
 
 const Register = () => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({})
-    const [formValues, setFormValues] = useState({
+    const {onChange, onSubmit, formValues} = useForm(registerUser, {
         username: '',
         email: '',
         password: '',
@@ -24,15 +25,7 @@ const Register = () => {
         variables: formValues
     })
 
-    const onChange = (event) => {
-        setFormValues({
-            ...formValues,
-            [event.target.name]: event.target.value
-        })
-    }
-
-    const onSubmit = (event) => {
-        event.preventDefault()
+    function registerUser() {
         addUser()
     }
 
