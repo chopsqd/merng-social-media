@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter} from "react-router-dom";
 import {ApolloClient, InMemoryCache, createHttpLink, ApolloProvider} from '@apollo/client'
 import App from './App'
 
@@ -13,6 +14,8 @@ const client = new ApolloClient({
 
 export default (
     <ApolloProvider client={client}>
-        <App />
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </ApolloProvider>
 );
