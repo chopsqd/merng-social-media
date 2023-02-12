@@ -1,17 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Card, Icon, Image, Label} from 'semantic-ui-react'
 import moment from 'moment'
 import {Link} from "react-router-dom";
+import {AuthContext} from "../context/auth";
+import LikeButton from "./LikeButton";
 
 const PostCard = ({post: {id, body, createdAt, username, likeCount, likes, commentCount, comments}}) => {
-
-    const likePost = () => {
-
-    }
-
-    const commentOnPost = () => {
-
-    }
+    const {user} = useContext(AuthContext)
 
     return (
         <Card fluid>
@@ -26,15 +21,8 @@ const PostCard = ({post: {id, body, createdAt, username, likeCount, likes, comme
                 <Card.Description>{body}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as='div' labelPosition='right' onClick={likePost}>
-                    <Button color='teal' basic>
-                        <Icon name='heart'/>
-                    </Button>
-                    <Label basic color='teal' pointing='left'>
-                        {likeCount}
-                    </Label>
-                </Button>
-                <Button as='div' labelPosition='right' onClick={commentOnPost}>
+                <LikeButton user={user} post={{id, likes, likeCount}}/>
+                <Button as={Link} to={`/posts/${id}`} labelPosition='right'>
                     <Button color='blue' basic>
                         <Icon name='comments'/>
                     </Button>
@@ -42,6 +30,16 @@ const PostCard = ({post: {id, body, createdAt, username, likeCount, likes, comme
                         {commentCount}
                     </Label>
                 </Button>
+                {user && user.username === username && (
+                    <Button
+                        as='div'
+                        color={"red"}
+                        floated={"right"}
+                        onClick={() => {}}
+                    >
+                        <Icon name={"trash alternate"} style={{margin: 0}}/>
+                    </Button>
+                )}
             </Card.Content>
         </Card>
     );
