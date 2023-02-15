@@ -55,7 +55,7 @@ const DELETE_POST = gql`
 `
 
 const DELETE_COMMENT = gql`
-    mutation deleteComment($postId: ID!, $commentId: ID!){
+    mutation deleteComment($postId: String!, $commentId: ID!){
         deleteComment(postId: $postId, commentId: $commentId){
             id
             comments{
