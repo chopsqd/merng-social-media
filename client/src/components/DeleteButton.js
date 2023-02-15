@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import {useMutation} from "@apollo/client";
 import {Button, Confirm, Icon} from "semantic-ui-react";
 
-import {FETCH_POSTS_QUERY} from "../utils/graphql";
-
 const DeleteButton = ({postId, callback}) => {
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [deletePost] = useMutation(DELETE_POST, {
